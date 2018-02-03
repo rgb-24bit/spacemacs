@@ -124,8 +124,9 @@ as the pyenv version then also return nil. This works around https://github.com/
 (defun spacemacs//pyvenv-mode-set-local-virtualenv ()
   "Set pyvenv virtualenv from \".venv\" by looking in parent directories."
   (interactive)
-  (let ((root-path (locate-dominating-file default-directory
-                                           ".venv")))
+  (let ((root-path (and (locate-dominating-file default-directory
+                                                ".venv")
+                        (not (file-directory-p ".venv")))))
     (when root-path
       (let* ((file-path (expand-file-name ".venv" root-path))
              (virtualenv
@@ -133,7 +134,7 @@ as the pyenv version then also return nil. This works around https://github.com/
                 (insert-file-contents-literally file-path)
                 (buffer-substring-no-properties (line-beginning-position)
                                                 (line-end-position)))))
-            (pyvenv-workon virtualenv)))))
+        (pyvenv-workon virtualenv)))))
 
 
 ;; Tests
