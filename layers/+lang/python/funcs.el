@@ -41,7 +41,7 @@ as the pyenv version then also return nil. This works around https://github.com/
               (pyenv-version-name (string-trim (shell-command-to-string "pyenv version-name"))))
           (and (not (string-match "not found" pyenv-string))
                (string-match pyenv-version-name (string-trim pyenv-string))
-                 (string-trim pyenv-string))))
+               (string-trim pyenv-string))))
     (executable-find command)))
 
 (defun spacemacs//python-setup-shell (&rest args)
@@ -114,8 +114,8 @@ as the pyenv version then also return nil. This works around https://github.com/
               (with-temp-buffer
                 (insert-file-contents-literally file-path)
                 (nth 0 (split-string (buffer-substring-no-properties
-                                       (line-beginning-position)
-                                       (line-end-position)))))))
+                                      (line-beginning-position)
+                                      (line-end-position)))))))
         (if (member version (pyenv-mode-versions))
             (pyenv-mode-set version)
           (message "pyenv: version `%s' is not installed (set by %s)"
@@ -124,9 +124,9 @@ as the pyenv version then also return nil. This works around https://github.com/
 (defun spacemacs//pyvenv-mode-set-local-virtualenv ()
   "Set pyvenv virtualenv from \".venv\" by looking in parent directories."
   (interactive)
-  (let ((root-path (and (locate-dominating-file default-directory
-                                                ".venv")
-                        (not (file-directory-p ".venv")))))
+  (let ((root-path (and
+                    (file-exists-p (concat default-directory ".venv"))
+                    (not (file-directory-p ".venv")))))
     (when root-path
       (let* ((file-path (expand-file-name ".venv" root-path))
              (virtualenv
@@ -164,7 +164,7 @@ when this mode is enabled since the minibuffer is cleared all the time."
 (defun spacemacs//python-get-secondary-testrunner ()
   "Get the secondary test runner"
   (cdr (assoc (spacemacs//python-get-main-testrunner) '((pytest . nose)
-                                             (nose . pytest)))))
+                                                        (nose . pytest)))))
 
 (defun spacemacs//python-call-correct-test-function (arg funcalist)
   "Call a test function based on the chosen test framework.
@@ -172,7 +172,7 @@ ARG is the universal-argument which chooses between the main and
 the secondary test runner. FUNCALIST is an alist of the function
 to be called for each testrunner. "
   (when python-save-before-test
-      (save-buffer))
+    (save-buffer))
   (let* ((test-runner (if arg
                           (spacemacs//python-get-secondary-testrunner)
                         (spacemacs//python-get-main-testrunner)))
@@ -186,19 +186,19 @@ to be called for each testrunner. "
   "Run all tests."
   (interactive "P")
   (spacemacs//python-call-correct-test-function arg '((pytest . pytest-all)
-                                           (nose . nosetests-all))))
+                                                      (nose . nosetests-all))))
 
 (defun spacemacs/python-test-pdb-all (arg)
   "Run all tests in debug mode."
   (interactive "P")
   (spacemacs//python-call-correct-test-function arg '((pytest . pytest-pdb-all)
-                                           (nose . nosetests-pdb-all))))
+                                                      (nose . nosetests-pdb-all))))
 
 (defun spacemacs/python-test-module (arg)
   "Run all tests in the current module."
   (interactive "P")
   (spacemacs//python-call-correct-test-function arg '((pytest . pytest-module)
-                                           (nose . nosetests-module))))
+                                                      (nose . nosetests-module))))
 
 (defun spacemacs/python-test-pdb-module (arg)
   "Run all tests in the current module in debug mode."
@@ -222,13 +222,13 @@ to be called for each testrunner. "
   "Run current test."
   (interactive "P")
   (spacemacs//python-call-correct-test-function arg '((pytest . pytest-one)
-                                           (nose . nosetests-one))))
+                                                      (nose . nosetests-one))))
 
 (defun spacemacs/python-test-pdb-one (arg)
   "Run current test in debug mode."
   (interactive "P")
   (spacemacs//python-call-correct-test-function arg '((pytest . pytest-pdb-one)
-                                           (nose . nosetests-pdb-one))))
+                                                      (nose . nosetests-pdb-one))))
 
 (defun spacemacs//bind-python-testing-keys ()
   "Bind the keys for testing in Python."
