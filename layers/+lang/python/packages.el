@@ -11,25 +11,23 @@
 
 (setq python-packages
   '(
-    anaconda-mode
     company
-    (company-anaconda :requires company)
+    counsel-gtags
     cython-mode
     eldoc
     evil-matchit
     flycheck
     ggtags
     helm-cscope
-    counsel-gtags
     helm-gtags
     (helm-pydoc :requires helm)
     hy-mode
     importmagic
     live-py-mode
-    (lsp-python :requires lsp-mode)
     (nose :location local)
     org
     pip-requirements
+    pipenv
     pippel
     py-isort
     pyenv-mode
@@ -42,11 +40,15 @@
     stickyfunc-enhance
     xcscope
     yapfify
+    ;; packages for anaconda backend
+    anaconda-mode
+    (company-anaconda :requires company)
+    ;; packages for lsp backend
+    (lsp-python :requires lsp-mode)
     ))
 
 (defun python/init-anaconda-mode ()
   (use-package anaconda-mode
-    :defer t
     :init (setq anaconda-mode-installation-directory
                 (concat spacemacs-cache-directory "anaconda-mode"))
     :config
@@ -185,6 +187,24 @@
   (spacemacs|use-package-add-hook org
     :post-config (add-to-list 'org-babel-load-languages '(python . t))))
 
+(defun python/init-pipenv ()
+  (use-package pipenv
+    :commands (pipenv-activate
+               pipenv-deactivate
+               pipenv-shell
+               pipenv-open
+               pipenv-install
+               pipenv-uninstall)
+    :init
+    (progn
+      (spacemacs/set-leader-keys-for-major-mode 'python-mode
+        "vpa" 'pipenv-activate
+        "vpd" 'pipenv-deactivate
+        "vpi" 'pipenv-install
+        "vpo" 'pipenv-open
+        "vps" 'pipenv-shell
+        "vpu" 'pipenv-uninstall))))
+
 (defun python/init-pip-requirements ()
   (use-package pip-requirements
     :defer t))
@@ -243,9 +263,9 @@
                    'spacemacs//pyvenv-mode-set-local-virtualenv)))
       (dolist (mode '(python-mode hy-mode))
         (spacemacs/set-leader-keys-for-major-mode mode
-          "Va" 'pyvenv-activate
-          "Vd" 'pyvenv-deactivate
-          "Vw" 'pyvenv-workon))
+          "va" 'pyvenv-activate
+          "vd" 'pyvenv-deactivate
+          "vw" 'pyvenv-workon))
       ;; setup shell correctly on environment switch
       (dolist (func '(pyvenv-activate pyvenv-deactivate pyvenv-workon))
         (advice-add func :after 'spacemacs/python-setup-everything)))))
@@ -305,8 +325,8 @@
       (spacemacs/declare-prefix-for-mode 'python-mode "mg" "goto")
       (spacemacs/declare-prefix-for-mode 'python-mode "ms" "REPL")
       (spacemacs/declare-prefix-for-mode 'python-mode "mr" "refactor")
-      (spacemacs/declare-prefix-for-mode 'python-mode "mv" "pyenv")
-      (spacemacs/declare-prefix-for-mode 'python-mode "mV" "pyvenv")
+      (spacemacs/declare-prefix-for-mode 'python-mode "mv" "virtualenv")
+      (spacemacs/declare-prefix-for-mode 'python-mode "mvp" "pipenv")
       (spacemacs/set-leader-keys-for-major-mode 'python-mode
         "'"  'spacemacs/python-start-or-switch-repl
         "cc" 'spacemacs/python-execute-file
