@@ -44,7 +44,8 @@
     (progn
       (add-to-list 'auto-mode-alist
                    `("\\.h\\'" . ,c-c++-default-mode-for-headers))
-      (add-hook 'c-mode-common-hook 'spacemacs//c-toggle-auto-newline))
+      (when c-c++-enable-auto-newline
+        (add-hook 'c-mode-common-hook 'spacemacs//c-toggle-auto-newline)))
     :config
     (progn
       (require 'compile)
@@ -87,7 +88,8 @@
 
 (defun c-c++/init-company-rtags ()
   (use-package company-rtags
-    :if c-c++-enable-rtags-support
+    :if (and c-c++-enable-rtags-support
+             (not (eq c-c++-enable-rtags-support 'no-completion)))
     :defer t
     :init
     (progn
