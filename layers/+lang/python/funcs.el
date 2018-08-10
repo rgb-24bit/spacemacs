@@ -32,9 +32,7 @@
 
 (defun spacemacs//python-setup-anaconda ()
   "Setup anaconda backend."
-  (anaconda-mode)
-  (add-to-list 'spacemacs-jump-handlers-python-mode
-               '(anaconda-mode-find-definitions :async t)))
+  (anaconda-mode))
 
 (defun spacemacs//python-setup-anaconda-company ()
   "Setup anaconda auto-completion."
@@ -70,7 +68,6 @@ when this mode is enabled since the minibuffer is cleared all the time."
   "Setup lsp backend."
   (if (configuration-layer/layer-used-p 'lsp)
       (progn
-        (require 'lsp-python)
         (lsp-python-enable))
     (message "`lsp' layer is not installed, please add `lsp' layer to your dotfile.")))
 
@@ -128,7 +125,7 @@ as the pyenv version then also return nil. This works around https://github.com/
 (defun spacemacs//python-setup-shell (&rest args)
   (if (spacemacs/pyenv-executable-find "ipython")
       (progn (setq python-shell-interpreter "ipython")
-             (if (version< (replace-regexp-in-string "[\r\n|\n]$" "" (shell-command-to-string "ipython --version")) "5")
+             (if (version< (replace-regexp-in-string "[\r\n|\n]$" "" (shell-command-to-string (format "%s --version" (string-trim (spacemacs/pyenv-executable-find "ipython"))))) "5")
                  (setq python-shell-interpreter-args "-i")
                (setq python-shell-interpreter-args "--simple-prompt -i")))
     (progn
@@ -385,7 +382,7 @@ to be called for each testrunner. "
   (let ((universal-argument t)
         (compile-command (format "%s %s"
                                  (spacemacs/pyenv-executable-find python-shell-interpreter)
-                                 (file-name-nondirectory buffer-file-name))))
+                                 (shell-quote-argument (file-name-nondirectory buffer-file-name)))))
     (if arg
         (call-interactively 'compile)
       (compile compile-command t)

@@ -138,6 +138,7 @@
   "b N j" 'spacemacs/new-empty-buffer-below
   "b N k" 'spacemacs/new-empty-buffer-above
   "b N l" 'spacemacs/new-empty-buffer-right
+  "b N f" 'spacemacs/new-empty-buffer-new-frame
   "b N n" 'spacemacs/new-empty-buffer
   "bP"    'spacemacs/copy-clipboard-to-whole-buffer
   "bp"    'previous-buffer
@@ -212,6 +213,7 @@
   "feU"  'configuration-layer/update-packages
   "fCd" 'spacemacs/unix2dos
   "fCu" 'spacemacs/dos2unix
+  "fi" 'spacemacs/insert-file
   "fg" 'rgrep
   "fl" 'find-file-literally
   "fE" 'spacemacs/sudo-edit
@@ -228,13 +230,13 @@
   "fyy" 'spacemacs/copy-file-path)
 ;; frame ----------------------------------------------------------------------
 (spacemacs/set-leader-keys
-  "Ff" 'find-file-other-frame
+  "Ff" 'spacemacs/find-file-other-frame
   "Fd" 'delete-frame
   "FD" 'delete-other-frames
-  "Fb" 'switch-to-buffer-other-frame
-  "FB" 'display-buffer-other-frame
+  "Fb" 'spacemacs/switch-to-buffer-other-frame
+  "FB" 'spacemacs/display-buffer-other-frame
   "Fo" 'other-frame
-  "FO" 'dired-other-frame
+  "FO" 'spacemacs/dired-other-frame
   "Fn" 'make-frame)
 ;; help -----------------------------------------------------------------------
 (spacemacs/set-leader-keys
@@ -366,10 +368,24 @@
   :mode font-lock-mode
   :documentation "Toggle syntax highlighting."
   :evil-leader "ths")
-(spacemacs|add-toggle column-indexing
-  :documentation "Toggle column indexing starting at 1."
-  :on (setq column-number-indicator-zero-based nil)
-  :off (setq column-number-indicator-zero-based t)
+(spacemacs|add-toggle zero-based-column-indexing
+  :documentation "Toggle column indexing starting at 0 versus 1.
+
+This is achieved by the built in functionality available in emacs 26 by changing
+the value of the `column-number-indicator-zero-based' variable. Functionality
+that does not take into acount `column-number-indicator-zero-based' will not
+respond to this toggle."
+  :status (bound-and-true-p column-number-indicator-zero-based)
+  :on (setq column-number-indicator-zero-based t)
+  :off (setq column-number-indicator-zero-based nil)
+  :on-message (concat
+                "Column indexing starts at 0 (current column is "
+                (number-to-string (current-column))
+                ")")
+  :off-message (concat
+                 "Column indexing starts at 1 (current column is "
+                 (number-to-string (1+ (current-column)))
+                 ")")
   :evil-leader "tz")
 
 (spacemacs|add-toggle transparent-frame

@@ -15,7 +15,7 @@
         company
         eldoc
         flycheck
-        lsp-mode
+        lsp-javascript-typescript
         smartparens
         tide
         typescript-mode
@@ -45,8 +45,9 @@
       (flycheck-add-mode 'typescript-tide 'typescript-tsx-mode)
       (flycheck-add-mode 'typescript-tslint 'typescript-tsx-mode))))
 
-(defun typescript/post-init-lsp-mode ()
-  (add-hook 'typescript-mode-hook 'lsp-mode))
+(defun typescript/post-init-lsp-javascript-typescript ()
+  (spacemacs//setup-lsp-jump-handler 'typescript-mode
+                                     'typescript-tsx-mode))
 
 (defun typescript/post-init-smartparens ()
   (if dotspacemacs-smartparens-strict-mode
@@ -79,7 +80,8 @@
       (setq keybindingList '("Ee" tide-fix
                              "Ed" tide-add-tslint-disable-next-line
                              "gb" tide-jump-back
-                             "gt" typescript/jump-to-type-def
+                             "gg" tide-jump-to-definition
+                             "gt" spacemacs/typescript-jump-to-type-def
                              "gu" tide-references
                              "hh" tide-documentation-at-point
                              "rr" tide-rename-symbol
