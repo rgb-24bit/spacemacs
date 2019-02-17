@@ -11,6 +11,7 @@
 
 (defun spacemacs//python-setup-backend ()
   "Conditionally setup python backend."
+  (when python-pipenv-activate (pipenv-activate))
   (pcase python-backend
     (`anaconda (spacemacs//python-setup-anaconda))
     (`lsp (spacemacs//python-setup-lsp))))
@@ -67,8 +68,7 @@ when this mode is enabled since the minibuffer is cleared all the time."
 (defun spacemacs//python-setup-lsp ()
   "Setup lsp backend."
   (if (configuration-layer/layer-used-p 'lsp)
-      (progn
-        (lsp-python-enable))
+      (lsp)
     (message "`lsp' layer is not installed, please add `lsp' layer to your dotfile.")))
 
 (defun spacemacs//python-setup-lsp-company ()
@@ -212,19 +212,22 @@ as the pyenv version then also return nil. This works around https://github.com/
                    version file-path))))))
 
 (defun spacemacs//pyvenv-mode-set-local-virtualenv ()
-  "Set pyvenv virtualenv from \".venv\" by looking in parent directories."
+  "Set pyvenv virtualenv from \".venv\" by looking in parent directories. handle directory or file"
   (interactive)
-  (let ((root-path (and
-                    (file-exists-p (concat default-directory ".venv"))
-                    (not (file-directory-p ".venv")))))
+  (let ((root-path (locate-dominating-file default-directory
+                                           ".venv")))
     (when root-path
       (let* ((file-path (expand-file-name ".venv" root-path))
              (virtualenv
-              (with-temp-buffer
-                (insert-file-contents-literally file-path)
-                (buffer-substring-no-properties (line-beginning-position)
-                                                (line-end-position)))))
-        (pyvenv-workon virtualenv)))))
+              (if (file-directory-p file-path)
+                  file-path
+                (with-temp-buffer
+                  (insert-file-contents-literally file-path)
+                  (buffer-substring-no-properties (line-beginning-position)
+                                                  (line-end-position))))))
+        (if (file-directory-p virtualenv)
+            (pyvenv-activate virtualenv)
+          (pyvenv-workon virtualenv))))))
 
 
 ;; Tests
