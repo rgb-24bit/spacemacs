@@ -75,14 +75,20 @@
           :variables company-minimum-prefix-length 2
           :append-hooks nil
           :call-hooks t)
-        (company-mode)
-        (fix-lsp-company-prefix))
+        (company-mode))
     (message (concat "`lsp' layer is not installed, "
                      "please add `lsp' layer to your dotfile."))))
 
 (defun spacemacs//typescript-setup-lsp-eldoc ()
   "Setup eldoc for LSP."
   (eldoc-mode))
+
+
+;; Emmet
+
+(defun spacemacs/typescript-emmet-mode ()
+  "Configure `emmet-mode' for local buffer."
+  (setq-local emmet-expand-jsx-className? t))
 
 
 ;; Others
