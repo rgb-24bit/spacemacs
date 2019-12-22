@@ -27,7 +27,7 @@
         (evil-evilified-state :location local :step pre :protected t)
         (pcre2el :step pre)
         (holy-mode :location local :step pre)
-        (hybrid-mode :location local :step pre)
+        (hybrid-mode :location (recipe :fetcher local) :step pre)
         (spacemacs-theme :location built-in)
         ))
 
@@ -70,7 +70,7 @@
   ;; Use evil as a default jump handler
   (add-to-list 'spacemacs-default-jump-handlers 'evil-goto-definition)
 
-  (require 'cl)
+  (require 'cl-lib)
   ;; State cursors
   (cl-loop for (state color shape) in spacemacs-evil-cursors
            do (spacemacs/add-evil-cursor state color shape))
@@ -339,6 +339,7 @@
          ;; being higher in this list means the replacement is applied later
          '(
            ("spacemacs/\\(.+\\)" . "\\1")
+           ("spacemacs//\\(.+\\)" . "\\1")
            ("spacemacs-\\(.+\\)" . "\\1")
            ("spacemacs/toggle-\\(.+\\)" . "\\1")
            ("\\(.+\\)-transient-state/\\(.+\\)" . "\\2")
