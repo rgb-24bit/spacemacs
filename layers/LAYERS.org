@@ -64,11 +64,11 @@
   - [[#spacemacs-visual][Spacemacs-visual]]
 - [[#music][Music]]
   - [[#alda-layer][Alda Layer]]
+  - [[#extempore][Extempore]]
   - [[#pianobar][Pianobar]]
   - [[#spotify][Spotify]]
   - [[#tidalcycles][TidalCycles]]
 - [[#operating-systems][Operating systems]]
-  - [[#kubernetes][Kubernetes]]
   - [[#nixos][NixOS]]
   - [[#osx][OSX]]
 - [[#pair-programming][Pair programming]]
@@ -214,6 +214,7 @@
   - [[#geolocation][Geolocation]]
   - [[#imenu-list][Imenu-list]]
   - [[#import-js][Import-js]]
+  - [[#kubernetes][Kubernetes]]
   - [[#lsp][LSP]]
   - [[#nginx][Nginx]]
   - [[#node][Node]]
@@ -989,6 +990,16 @@ Features:
 - Play portions of a buffer, or the entire buffer,
   through a running Alda server.
 
+** Extempore
+[[file:+lang/extempore/README.org][+lang/extempore/README.org]]
+
+This layer adds support for the [[https://github.com/digego/extempore][Extempore]] programming environment.
+
+Features:
+- run Extempore (inferior extempore buffer)
+- connect to & evaluate code
+- eldoc support
+
 ** Pianobar
 [[file:+music/pianobar/README.org][+music/pianobar/README.org]]
 
@@ -1016,21 +1027,6 @@ Features:
 - Spacemacs friendly key bindings
 
 * Operating systems
-** Kubernetes
-[[file:+tools/kubernetes/README.org][+tools/kubernetes/README.org]]
-
-This layer provides the [[https://github.com/chrisbarrett/kubernetes-el#kubernetes-el][kubernetes-el]] package, a magit-style interface to the
-Kubernetes command-line client.
-
-Features:
-- Live-updating lists of kubernetes resources
-- Viewing and deleting pods, configmaps and secrets
-- Switching contexts and namespaces.
-- Showing logs and exec'ing into containers
-- Describing pods
-- Tramp support for pods
-- Evil bindings
-
 ** NixOS
 [[file:+os/nixos/README.org][+os/nixos/README.org]]
 
@@ -1249,7 +1245,6 @@ Features:
 - REPL via [[https://github.com/clojure-emacs/cider][CIDER]]
 - Code formatting via [[https://github.com/clojure-emacs/cider][CIDER]] using [[https://github.com/weavejester/cljfmt][Cljfmt]]
 - Refactoring via [[https://github.com/clojure-emacs/clj-refactor.el][clj-refactor]]
-- Linting via [[https://github.com/clojure-emacs/squiggly-clojure][squiggly-clojure]], [[https://github.com/borkdude/clj-kondo][clj-kondo]] or [[https://github.com/candid82/joker][joker]]
 - Aligning of code forms via [[https://github.com/clojure-emacs/clojure-mode][clojure-mode]]
 - Debugging with [[https://github.com/clojure-emacs/sayid][sayid]]
 - Clojure cheatsheet
@@ -2006,7 +2001,7 @@ Features:
 - Complete and jump to define with [[https://github.com/xcwen/ac-php][company-php]]
 - Run tests with PHPUnit
 - Reformat code with PHP CBF
-- Debug your programs with XDebug (via [[https://github.com/ahungry/geben][geben]])
+- Debug your programs with XDebug (via [[https://github.com/ahungry/geben][geben]] or [[https://github.com/emacs-lsp/dap-mode][dap-mode]])
 - Refactor source files with help of [[https://github.com/emacs-php/phpactor.el][phpactor.el]]
 - Support for the [[https://langserver.org/][Language Server Protocol]] (experimental)
 
@@ -2253,7 +2248,7 @@ Features:
 
 ** Utilities
 *** Conda Layer
-[[file:+lang/conda/README.org][+lang/conda/README.org]]
+[[file:+tools/conda/README.org][+tools/conda/README.org]]
 
 This layer adds support for the Anaconda python environment for
 numerical computations to Spacemacs.
@@ -2270,7 +2265,7 @@ Features:
 - dotnet operations
 
 *** IPython Notebook
-[[file:+lang/ipython-notebook/README.org][+lang/ipython-notebook/README.org]]
+[[file:+tools/ipython-notebook/README.org][+tools/ipython-notebook/README.org]]
 
 This layer adds support for the package =emacs-ipython-notebook=.
 
@@ -2290,7 +2285,7 @@ Features:
 - Syntax highlighting
 - Syntax checking using Flycheck (=protoc= compiler must be available)
 - Correct indentation and commenting
-- Quickly browse file contents using imenu (default key binding ~SPC j i~).
+- Quickly browse file contents using imenu (default key binding ~SPC b t~).
 
 *** Sailfish OS developer
 [[file:+tools/sailfish-developer/README.org][+tools/sailfish-developer/README.org]]
@@ -2755,6 +2750,21 @@ Features:
 - Import Javascript/Typescript modules to buffer
 - Import missing modules and remove unused one
 - Go to module location
+
+** Kubernetes
+[[file:+tools/kubernetes/README.org][+tools/kubernetes/README.org]]
+
+This layer provides the [[https://github.com/chrisbarrett/kubernetes-el#kubernetes-el][kubernetes-el]] package, a magit-style interface to the
+Kubernetes command-line client.
+
+Features:
+- Live-updating lists of kubernetes resources
+- Viewing and deleting pods, configmaps and secrets
+- Switching contexts and namespaces.
+- Showing logs and exec'ing into containers
+- Describing pods
+- Tramp support for pods
+- Evil bindings
 
 ** LSP
 [[file:+tools/lsp/README.org][+tools/lsp/README.org]]
