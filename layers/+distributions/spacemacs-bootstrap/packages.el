@@ -323,7 +323,7 @@
         which-key-idle-secondary-delay 0.01
         which-key-max-description-length 32
         which-key-max-display-columns nil
-        which-key-min-display-lines 6
+        which-key-min-display-lines 2
         which-key-prevent-C-h-from-cycling t
         which-key-sort-order 'which-key-prefix-then-key-order
         which-key-sort-uppercase-first nil
