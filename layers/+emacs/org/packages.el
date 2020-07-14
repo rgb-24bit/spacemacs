@@ -440,7 +440,7 @@ Will work on both org-mode and any mode that accepts plain html."
         ("k" org-babel-previous-src-block)
         ("g" org-babel-goto-named-src-block)
         ("z" recenter-top-bottom)
-        ("e" org-babel-execute-maybe :exit t)
+        ("e" org-babel-execute-maybe)
         ("'" org-edit-special :exit t)))))
 
 (defun org/init-org-agenda ()
@@ -782,8 +782,8 @@ Headline^^            Visit entry^^               Filter^^                    Da
 
       (spacemacs/set-leader-keys-for-major-mode 'org-journal-mode
         "j" 'org-journal-new-entry
-        "n" 'org-journal-open-next-entry
-        "p" 'org-journal-open-previous-entry)
+        "n" 'org-journal-next-entry
+        "p" 'org-journal-previous-entry)
 
       (spacemacs//init-leader-mode-map 'org-journal-mode 'spacemacs-org-journal-mode-map))))
 
