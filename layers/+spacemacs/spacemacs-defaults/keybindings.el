@@ -14,7 +14,7 @@
 ;; ---------------------------------------------------------------------------
 
 ;; We define prefix commands only for the sake of which-key
-(setq spacemacs/key-binding-prefixes '(("SPC" "M-x")
+(setq spacemacs/key-binding-prefixes `((,dotspacemacs-emacs-command-key "M-x")
                                        ("!"   "shell cmd")
                                        ("*"   "search project w/input")
                                        ("/"   "search project")
@@ -441,6 +441,8 @@
   "cC" 'compile
   "ck" 'kill-compilation
   "cr" 'recompile
+  "cn" 'next-error
+  "cN" 'previous-error
   "cd" 'spacemacs/show-hide-compilation-window
   "cb" 'spacemacs/switch-to-compilation-buffer)
 (with-eval-after-load 'compile
