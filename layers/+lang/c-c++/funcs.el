@@ -197,6 +197,7 @@
       "gD" 'rtags-diagnostics
       "ge" 'rtags-reparse-file
       "gE" 'rtags-preprocess-file
+      "gf" 'rtags-find-dead-functions
       "gF" 'rtags-fixit
       "gG" 'rtags-guess-function-at-point
       "gh" 'rtags-print-class-hierarchy
@@ -205,10 +206,13 @@
       "gM" 'rtags-symbol-info
       "gO" 'rtags-goto-offset
       "gp" 'rtags-set-current-project
+      "gr" 'rtags-references-tree
       "gR" 'rtags-rename-symbol
       "gs" 'rtags-print-source-arguments
       "gS" 'rtags-display-summary
+      "gt" 'rtags-symbol-type
       "gT" 'rtags-taglist
+      "gu" 'rtags-dependency-tree 
       "gv" 'rtags-find-virtuals-at-point
       "gV" 'rtags-print-enum-value-at-point
       "gX" 'rtags-fix-fixit-at-point

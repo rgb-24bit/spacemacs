@@ -24,6 +24,7 @@
   - [[#helpful][Helpful]]
   - [[#ibuffer][IBuffer]]
   - [[#org][Org]]
+  - [[#outshine][Outshine]]
   - [[#quickurl][Quickurl]]
   - [[#semantic][Semantic]]
   - [[#smex][Smex]]
@@ -481,6 +482,16 @@ Features:
 - Insertion of images via [[https://github.com/abo-abo/org-download][org-download]]
 - Project-specific TODOs via [[https://github.com/IvanMalison/org-projectile][org-projectile]]
 - Easy insert of URLs from clipboard with org format via [[https://github.com/rexim/org-cliplink][org-cliplink]]
+
+** Outshine
+[[file:+emacs/outshine/README.org][+emacs/outshine/README.org]]
+
+This layer adds support for [[https://github.com/alphapapa/outshine][outshine]] and [[https://github.com/alphapapa/outorg][outorg]]. They will be enabled in all
+programming modes.
+
+Features:
+- Navigate through code buffers via headings like you do with org buffers
+- Edit comments under outline headings in separate org-mode buffers
 
 ** Quickurl
 [[file:+tools/quickurl/README.org][+tools/quickurl/README.org]]
@@ -1075,7 +1086,7 @@ Features:
 - Refactoring via [[https://github.com/clojure-emacs/clj-refactor.el][clj-refactor]]
 - Aligning of code forms via [[https://github.com/clojure-emacs/clojure-mode][clojure-mode]]
 - Debugging with [[https://github.com/clojure-emacs/sayid][sayid]]
-- Clojure cheatsheet
+- Advanced help with [[https://github.com/clojure-emacs/helm-cider][helm-cider]]
 - Structuraly safe editing using optional [[https://github.com/luxbock/evil-cleverparens][evil-cleverparens]]
 - Linting via [[https://github.com/borkdude/clj-kondo][clj-kondo]] ([[https://github.com/candid82/joker][joker]] and [[https://github.com/clojure-emacs/squiggly-clojure][squiggly-clojure]] also available)
 
@@ -1932,7 +1943,7 @@ Features:
 - syntax-highlighting
 - Auto-completion
 - Code Navigation
-- Python test runners (see [[file:+lang/python/README.org][python layer]])
+- Python test runners (see [[file:+lang/hy/../python/README.org][python layer]])
 - Virtual Environment using [[https://github.com/jorgenschaefer/pyvenv][pyvenv]] and [[https://github.com/yyuu/pyenv][pyenv]]
 - Org Babel support
 
@@ -1947,7 +1958,7 @@ Features:
   - [[https://github.com/mopemope/meghanada-emacs][Meghanada]] client/server
 - Auto-completion using company
 - Linting using flycheck integration
-- Maven and Gradle integration
+- Maven integration
 - Interactive debugger using [[https://github.com/emacs-lsp/dap-mode][dap-mode]]
 
 **** JR Concurrent Programming Language
@@ -2001,9 +2012,9 @@ Features:
 This layer adds support for the multi-paradigm language =Nim=.
 
 Features:
-- Code completion.
+- Auto-completion
+- Syntax-checking
 - Jump to definition.
-- Syntax checking.
 
 **** Ocaml
 [[file:+lang/ocaml/README.org][+lang/ocaml/README.org]]
@@ -2147,7 +2158,8 @@ This layer supports [[https://www.rust-lang.org][Rust]] development in Spacemacs
 Features:
 - Auto-completion and navigation support through [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]] or [[https://github.com/phildawes/racer][Racer]]
 - Interactive debugger using [[https://github.com/emacs-lsp/dap-mode][dap-mode]]
-- support for the Rust package manager [[http://doc.crates.io/index.html][Cargo]]
+- Support for the Rust package manager [[http://doc.crates.io/index.html][Cargo]]
+- Support for [[https://github.com/nabero/ron-mode][Rusty Object Notation (RON)]]
 
 **** Scala
 [[file:+lang/scala/README.org][+lang/scala/README.org]]
@@ -2223,8 +2235,7 @@ It relies on [[https://github.com/jcollard/elm-mode][elm-mode]] and [[https://gi
 Features:
 - Syntax highlighting.
 - Intelligent indentation
-- Auto-completion integration for company (default) or auto-complete modes,
-  with using elm-oracle
+- Auto-completion integration for company (default) or auto-complete modes
 - Syntax checking support using flycheck
 - Integration with elm-make
 - Integration with elm-repl
@@ -2237,11 +2248,8 @@ Features:
 This layer adds support for the [[https://www.haskell.org/][Haskell]] language.
 
 Features:
-- syntax highlighting for [[https://github.com/haskell/haskell-mode][haskell source]], [[https://github.com/haskell/haskell-mode][cabal files]], [[https://github.com/bgamari/cmm-mode][C-- source]],
-- auto-completion with one of the selected backends (=intero=, =dante=, =ghci= or
-  =ghc-mod=).
-
-*This layer is under construction, it needs your contributions and bug reports.*
+- syntax highlighting for [[https://github.com/haskell/haskell-mode][haskell source]], [[https://github.com/haskell/haskell-mode][cabal files]], [[https://github.com/bgamari/cmm-mode][C-- source]]
+- auto-completion and syntax-checking with one of the selected backends (=dante= or =lsp=).
 
 **** Idris
 [[file:+lang/idris/README.org][+lang/idris/README.org]]
@@ -2620,10 +2628,12 @@ Features:
 This layer adds support [[https://cmake.org/][CMake]] scripts.
 
 Features:
-- Support for CMake configure/build (with limited support for other build systems),
-  automatic generation of =compile_commands.json= (compile flags), on-the-fly configuration
-  of flycheck, company-clang and RTags (if installed) with [[https://github.com/atilaneves/cmake-ide][cmake-ide]].
+- Syntax highlighting
+- Auto-completion
+- Support for CMake configure/build (with limited support for other build systems) and
+  automatic generation of =compile_commands.json= (compile flags).
 - Run selected test using =Helm= interface via =helm-ctest=.
+- Extraction of compile parameters from =compile_commands.json= with [[https://github.com/atilaneves/cmake-ide][cmake-ide]]
 
 ** Command-log
 [[file:+tools/command-log/README.org][+tools/command-log/README.org]]
