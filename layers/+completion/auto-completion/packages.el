@@ -27,7 +27,6 @@
         (ivy-yasnippet :requires ivy)
         smartparens
         yasnippet
-        yasnippet-snippets
         ))
 
 ;; TODO replace by company-ispell which comes with company
@@ -340,5 +339,3 @@
                                                           org-mode-hook))
       )
     :config (spacemacs|diminish yas-minor-mode " ⓨ" " y")))
-
-(defun auto-completion/init-yasnippet-snippets ())
