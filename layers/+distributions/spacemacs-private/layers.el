@@ -8,7 +8,7 @@
  '(
    spacemacs-completion
    spacemacs-defaults
-   spacemacs-editing
+   (spacemacs-editing :packages (not editorconfig))
    spacemacs-editing-visual
    spacemacs-modeline
    spacemacs-navigation
